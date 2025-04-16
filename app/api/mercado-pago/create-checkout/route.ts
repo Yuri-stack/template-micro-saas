@@ -12,7 +12,8 @@ export async function POST(req: NextRequest) {
             body: {
                 external_reference: testeId, // impacta na pontuação do Mercado Pago
                 metadata: {
-                    testeId
+                    testeId,
+                    userEmail
                 },
                 ...(userEmail && { payer: { email: userEmail } }),
                 items: [
@@ -33,9 +34,9 @@ export async function POST(req: NextRequest) {
                 },
                 auto_return: "approved",
                 back_urls: {
-                    success: `${process.env.NEXT_PUBLIC_APP_URL}/api/mercado-pago/success`,
-                    failure: `${process.env.NEXT_PUBLIC_APP_URL}/api/mercado-pago/failure`,
-                    pending: `${process.env.NEXT_PUBLIC_APP_URL}/api/mercado-pago/pending`,
+                    success: `${req.headers.get("origin")}/api/mercado-pago/success`,
+                    failure: `${req.headers.get("origin")}/api/mercado-pago/failure`,
+                    pending: `${req.headers.get("origin")}/api/mercado-pago/pending`,
                 }
             }
         })
