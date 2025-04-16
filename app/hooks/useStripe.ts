@@ -16,7 +16,7 @@ export function useStripe() {
     }, [])
 
     // Função para pagamentos únicos
-    async function createPaymentStripeCheckout(checkoutData: any) {
+    async function createPaymentStripeCheckout(checkoutData: { testeId: string }) {
         if (!stripe) return
 
         try {
@@ -38,7 +38,7 @@ export function useStripe() {
     }
 
     // Função para pagamentos consecutivos (plano mensal ou anual)
-    async function createSubscriptionStripeCheckout(checkoutData: any) {
+    async function createSubscriptionStripeCheckout(checkoutData: { testeId: string }) {
         if (!stripe) return
 
         try {
